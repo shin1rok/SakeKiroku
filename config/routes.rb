@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  # pages_controller
+  get '/' => 'pages#home'
+
   # posts_controller
   get 'posts/index' => "posts#index"
   get 'posts/new' => "posts#new"
