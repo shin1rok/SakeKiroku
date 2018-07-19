@@ -10,6 +10,19 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(content: params[:content])
     @post.save
+    flash[:notice] = "投稿しました"
+    redirect_to "/posts/index"
+  end
+
+  def edit
+    @post = Post.find_by(id: params[:post_id])
+  end
+
+  def update
+    @post = Post.find_by(id: params[:post_id])
+    @post.content = params[:content]
+    @post.save
+    flash[:notice] = "投稿を編集しました"
     redirect_to "/posts/index"
   end
 

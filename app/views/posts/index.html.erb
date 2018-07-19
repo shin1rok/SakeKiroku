@@ -4,5 +4,6 @@
 
 <% @posts.each do |post| %>
 <li><%= post.content %></li>
+  <%= link_to("編集", "/posts/#{post.id}") %>
   <%= link_to("削除", "/posts/#{post.id}/destroy", method: :post) %>
 <% end %>
