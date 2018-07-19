@@ -8,7 +8,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(content: params[:content])
+    @post = Post.new(content: params[:content],
+                     user_id: @current_user.id)
     @post.save
     flash[:notice] = "投稿しました"
     redirect_to "/posts/index"
@@ -19,7 +20,8 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find_by(id: params[:post_id])
+    @post = Post.find_by(id: params[:post_id],
+                         user_id: @current_user.id)
     @post.content = params[:content]
     @post.save
     flash[:notice] = "投稿を編集しました"
@@ -27,7 +29,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find_by(id: params[:post_id])
+    @post = Post.find_by(id: params[:post_id],
+                         user_id: @current_user.id)
     @post.destroy
     flash[:notice] = "投稿を削除しました"
     redirect_to "/posts/index"
