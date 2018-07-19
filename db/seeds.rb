@@ -6,7 +6,16 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-99.times do |n|
-  content = n
-  Post.create!(content: content)
+10.times do |n|
+  user_id = 1
+  content = "#{n}投稿目, 新規投稿ユーザーID_#{user_id}"
+  Post.create!(content: content,
+               user_id: user_id)
+end
+
+10.times do |n|
+  user_id = 2
+  content = "#{n}投稿目, 新規投稿ユーザーID_#{user_id}"
+  Post.create!(content: content,
+               user_id: user_id)
 end
