@@ -13,9 +13,12 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(content: params[:content],
                      user_id: @current_user.id)
-    @post.save
-    flash[:notice] = "投稿しました"
-    redirect_to "/posts/index"
+    if @post.save
+      flash[:notice] = "投稿しました"
+      redirect_to "/posts/index"
+    else
+      render '/posts/new'
+    end
   end
 
   def edit
@@ -26,9 +29,12 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:post_id],
                          user_id: @current_user.id)
     @post.content = params[:content]
-    @post.save
-    flash[:notice] = "投稿を編集しました"
-    redirect_to "/posts/index"
+    if @post.save
+      flash[:notice] = "投稿を編集しました"
+      redirect_to "/posts/index"
+    else
+      render '/posts/edit'
+    end
   end
 
   def destroy
