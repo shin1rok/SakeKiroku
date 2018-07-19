@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
   def create
-
     user = User.find_or_create_from_auth_hash(request.env['omniauth.auth'])
     if user
       # request.env['omniauth.auth']に、OmniAuthによってHashのようにユーザーのデータが格納されている。
@@ -11,5 +10,11 @@ class SessionsController < ApplicationController
       flash[:notice] = 'ログインできませんでした'
       redirect_to '/posts/index'
     end
+  end
+
+  def logout
+    session[:user_id] = nil
+    flash[:notice] = 'ログアウトしました'
+    redirect_to '/posts/index'
   end
 end
