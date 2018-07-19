@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  def create
+  def login
     user = User.find_or_create_from_auth_hash(request.env['omniauth.auth'])
     if user
       # request.env['omniauth.auth']に、OmniAuthによってHashのようにユーザーのデータが格納されている。
