@@ -1,8 +1,7 @@
 <h1>Post#new</h1>
 
-<% @post.errors.full_messages.each do |message| %>
-  <%= message %>
-<% end %>
+<%= render 'posts/error' %>
+
 
 <%= form_tag("/posts/#{@post.id}/update") do %>
   <textarea name="content"><%= @post.content %></textarea>
