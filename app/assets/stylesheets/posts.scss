@@ -1,3 +1,41 @@
-// Place all the styles related to the post controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+/* posts/index ================================ */
+.posts-index-item {
+  padding: 20px 30px;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 6px #c1ced7;
+}
+
+.post-content {
+  width: 100%;
+  word-wrap: break-word;
+}
+
+.post-menu {
+  float: right;
+  width: 100%;
+  padding-right: 25px;
+  text-align: right;
+}
+
+.post-menu a {
+  color: blue;
+}
+
+.post-menu a:hover{
+  color: red;
+}
+
+/* posts/new & posts/edit ================================ */
+.posts-new-edit {
+  text-align: center;
+}
+
+.posts-new-edit textarea {
+  font-size: 20px;
+  padding: 10px;
+  min-height: 140px;
+  border: 1px solid rgb(216, 218, 223);
+  resize: none;
+}
+

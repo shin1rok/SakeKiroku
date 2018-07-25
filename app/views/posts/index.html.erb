@@ -1,9 +1,15 @@
-<h1>Post#index</h1>
-<p>Find me in app/views/post/index.html.erb</p>
-
-
-<% @posts.each do |post| %>
-<li><%= post.content %></li>
-  <%= link_to("編集", "/posts/#{post.id}") %>
-  <%= link_to("削除", "/posts/#{post.id}/destroy", method: :post) %>
-<% end %>
+<div class="main posts-index">
+  <div class="container">
+    <% @posts.each do |post| %>
+      <div class="posts-index-item">
+        <div class="post-content">
+          <li><%= post.content %></li>
+        </div>
+        <div class="post-menu">
+          <%= link_to("編集", "/posts/#{post.id}") %>
+          <%= link_to("削除", "/posts/#{post.id}/destroy", method: :post) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

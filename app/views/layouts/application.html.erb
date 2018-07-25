@@ -7,23 +7,34 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
   </head>
 
   <header>
-    <ul>
+    <div class="header-logo">
+      <% if @current_user %>
+        <%= link_to('SakeKiroku', '/posts/index') %>
+      <% else %>
+        <%= link_to('SakeKiroku', '/') %>
+      <% end %>
+    </div>
+    <ul class="header-menus">
       <% if @current_user %>
         <li>
-          <%= link_to("投稿一覧", "/posts/index") %>
+          <%= link_to('投稿一覧', '/posts/index') %>
         </li>
         <li>
-          <%= link_to("新規投稿", "/posts/new") %>
+          <%= link_to('新規投稿', '/posts/new') %>
         </li>
         <li>
           <%= link_to('ログアウト', '/sessions/logout') %>
         </li>
       <% else %>
         <li>
-          <%= link_to('Twitterでログイン', '/auth/twitter') %>
+          <%= link_to('/auth/twitter') do %>
+            <span class="fa fa-twitter"></span>Twitterでログイン
+          <% end %>
         </li>
       <% end %>
     </ul>
@@ -35,8 +46,7 @@
     </div>
   <% end %>
 
-
-<body>
+  <body>
     <%= yield %>
   </body>
 </html>
