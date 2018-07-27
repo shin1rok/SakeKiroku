@@ -19,10 +19,21 @@ class PostsController < ApplicationController
     else
       render '/posts/new'
     end
+
+
+  # 入力されたタグがタグテーブルにあるか確認
+  # ある場合→何もしない
+  # ない場合→タグテーブルにInsert
+  #
+  # postテーブルとpost_tagテーブルにInsert
+  #
   end
 
   def edit
     @post = Post.find_by(id: params[:post_id])
+
+  # タグがあれば表示する
+  #
   end
 
   def update
@@ -35,6 +46,13 @@ class PostsController < ApplicationController
     else
       render '/posts/edit'
     end
+
+    # 入力されたタグがタグテーブルにあるか確認
+    # ある場合→何もしない
+    # ない場合→タグテーブルにInsert
+    #
+    # postテーブルとpost_tagテーブルを更新する
+    #
   end
 
   def destroy
@@ -43,6 +61,10 @@ class PostsController < ApplicationController
     @post.destroy
     flash[:notice] = "投稿を削除しました"
     redirect_to "/posts/index"
+
+  # postが削除されるとき、post_tagテーブルも削除する。
+  # tagテーブルはそのまま残す
+  #
   end
 
   def ensure_correct_user
