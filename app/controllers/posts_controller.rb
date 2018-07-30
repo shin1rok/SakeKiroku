@@ -8,25 +8,40 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @post_tags = nil
   end
 
   def create
+    # render時に値を保持する
     @post = Post.new(content: params[:content],
                      user_id: @current_user.id)
-    if @post.save
-      flash[:notice] = "投稿しました"
-      redirect_to "/posts/index"
-    else
-      render '/posts/new'
+    @post_tags = params[:tags]
+    # 入力されたタグがタグテーブルにあるか確認
+    params[:tags].split(',').each do |tag|
+      unless Tag.find_by(name: tag)
+        # ない場合は登録
+        tag = Tag.new(name: tag)
+        unless tag.save
+          render '/posts/new'
+        end
+      end
     end
 
-
-  # 入力されたタグがタグテーブルにあるか確認
-  # ある場合→何もしない
-  # ない場合→タグテーブルにInsert
-  #
-  # postテーブルとpost_tagテーブルにInsert
-  #
+    # postテーブルとpost_tagテーブルにInsert
+    Post.transaction do
+      @post.save!
+      params[:tags].split(',').each do |tag|
+        tag_id = Tag.find_by(name: tag).id
+        post_tag = @post.post_tags.new(tag_id: tag_id)
+        post_tag.save!
+      end
+      flash[:notice] = '投稿しました'
+      redirect_to '/posts/index'
+    end
+    rescue => e
+      # :TODO message should change
+      flash[:notice] = e.message
+      render '/posts/new'
   end
 
   def edit
@@ -48,6 +63,14 @@ class PostsController < ApplicationController
     end
 
     # 入力されたタグがタグテーブルにあるか確認
+    # [:tags].split(',').each do |tag|
+    #   if Tag.find_by(name: tag)
+    #
+    #   else
+    #     tag = Tag.new(name: tag)
+    #     tag.save
+    #   end
+    # end
     # ある場合→何もしない
     # ない場合→タグテーブルにInsert
     #
