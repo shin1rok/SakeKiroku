@@ -5,7 +5,11 @@
       <div class="form">
         <div class="form-body">
           <%= render 'posts/error' %>
-          <textarea name="content"><%= @post.content %></textarea>
+          <label for="tags">Tag</label>
+          <input name="tags" id="tags" placeholder="カンマ区切りで入力">
+          <div class="form-padding"></div>
+          <label for="content">Content</label>
+          <textarea name="content" id="content"><%= @post.content %></textarea>
           <input type="submit" value="投稿">
         </div>
       </div>

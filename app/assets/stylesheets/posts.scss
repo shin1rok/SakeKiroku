@@ -35,7 +35,7 @@
 
 /* posts/new & posts/edit ================================ */
 .posts-new-edit {
-  text-align: center;
+  //text-align: center;
 }
 
 .posts-new-edit textarea {
@@ -46,3 +46,6 @@
   resize: none;
 }
 
+.form-padding {
+  padding-top: 30px;
+}
