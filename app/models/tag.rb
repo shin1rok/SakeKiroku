@@ -1,5 +1,5 @@
 class Tag < ApplicationRecord
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
 
   # post_tagsとの関係
   has_many :post_tags, dependent: :destroy
