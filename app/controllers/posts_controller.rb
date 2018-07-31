@@ -16,16 +16,8 @@ class PostsController < ApplicationController
     @post = Post.new(content: params[:content],
                      user_id: @current_user.id)
     @post_tags = params[:tags]
-    # 入力されたタグがタグテーブルにあるか確認
-    params[:tags].split(',').each do |tag|
-      unless Tag.find_by(name: tag)
-        # ない場合は登録
-        tag = Tag.new(name: tag)
-        unless tag.save
-          render '/posts/new'
-        end
-      end
-    end
+    # タグが入力されている場合はregister_tagsを呼び出す
+    params[:tags] && register_tags(params[:tags])
 
     # postテーブルとpost_tagテーブルにInsert
     Post.transaction do
@@ -95,6 +87,18 @@ class PostsController < ApplicationController
     if @post.user_id != @current_user.id
       flash[:notice] = "権限がありません"
       redirect_to "/posts/index"
+    end
+  end
+
+  def register_tags(tags)
+    tags.split(',').each do |tag|
+      unless Tag.find_by(name: tag)
+        # ない場合は登録
+        tag = Tag.new(name: tag)
+        unless tag.save
+          render '/posts/new' && return
+        end
+      end
     end
   end
 end
