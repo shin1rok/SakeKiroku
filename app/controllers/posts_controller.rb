@@ -49,28 +49,33 @@ class PostsController < ApplicationController
   def update
     @post = Post.find_by(id: params[:post_id],
                          user_id: @current_user.id)
+    # render時に値を保持する
     @post.content = params[:content]
-    if @post.save
-      flash[:notice] = "投稿を編集しました"
-      redirect_to "/posts/index"
-    else
-      render '/posts/edit'
-    end
+    @post_tags = params[:tags]
 
-    # 入力されたタグがタグテーブルにあるか確認
-    # [:tags].split(',').each do |tag|
-    #   if Tag.find_by(name: tag)
-    #
-    #   else
-    #     tag = Tag.new(name: tag)
-    #     tag.save
-    #   end
-    # end
-    # ある場合→何もしない
-    # ない場合→タグテーブルにInsert
-    #
-    # postテーブルとpost_tagテーブルを更新する
-    #
+    # タグが入力されている場合はregister_tagsを呼び出す
+    params[:tags] && register_tags(params[:tags])
+
+    # タグに変更があるか確認せずに問答無用でDELETEする場合
+    Post.transaction do
+      # ポストに紐づくタグを削除
+      post_tags = PostTag.where(post_id: @post.id)
+      post_tags.destroy_all
+      # ポストを更新
+      @post.save!
+      # ポストに紐づくタグを登録
+      params[:tags].split(',').each do |tag|
+        tag_id = Tag.find_by(name: tag).id
+        post_tag = @post.post_tags.new(tag_id: tag_id)
+        post_tag.save!
+      end
+      flash[:notice] = '投稿を編集しました'
+      redirect_to '/posts/index'
+    end
+    rescue => e
+      # :TODO message should change
+      flash[:notice] = e.message
+      render '/posts/edit'
   end
 
   def destroy
