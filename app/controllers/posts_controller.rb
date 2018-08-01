@@ -38,9 +38,12 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find_by(id: params[:post_id])
-
-  # タグがあれば表示する
-  #
+    post_tags = PostTag.where(post_id: @post.id)
+    tags = []
+    post_tags.each do |post_tag|
+      tags << Tag.find_by(id: post_tag.tag_id).name
+    end
+    @post_tags = tags.join(',')
   end
 
   def update

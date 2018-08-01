@@ -6,7 +6,7 @@
         <div class="form-body">
           <%= render 'posts/error' %>
           <label for="tags">Tag</label>
-          <input name="tags" id="tags" placeholder="カンマ区切りで入力">
+          <input name="tags" id="tags" placeholder="カンマ区切りで入力" value="<%= @post_tags %>">
           <div class="form-padding"></div>
           <label for="content">Content</label>
           <textarea name="content" id="content"><%= @post.content %></textarea>
