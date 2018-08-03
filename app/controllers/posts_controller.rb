@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.where(user_id: @current_user.id)
+    @posts = Post.where(user_id: @current_user.id).order(created_at: :desc)
   end
 
   def new
