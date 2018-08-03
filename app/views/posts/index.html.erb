@@ -12,7 +12,9 @@
         <% end %>
         <div class="post-menu">
           <%= link_to("編集", "/posts/#{post.id}") %>
-          <%= link_to("削除", "/posts/#{post.id}/destroy", method: :post) %>
+          <%= link_to("削除", "/posts/#{post.id}/destroy",
+                      method: :post,
+                      data: {confirm: '削除してよろしいですか？'}) %>
         </div>
       </div>
     <% end %>
