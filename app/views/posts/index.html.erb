@@ -10,6 +10,9 @@
             <li><%="#" + Tag.find_by(id: post_tag.tag_id).name %></li>
           </div>
         <% end %>
+        <div class="post-time">
+          <%= post.created_at.to_s(:datetime) %>
+        </div>
         <div class="post-menu">
           <%= link_to("編集", "/posts/#{post.id}") %>
           <%= link_to("削除", "/posts/#{post.id}/destroy",
