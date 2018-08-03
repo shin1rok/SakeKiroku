@@ -82,19 +82,15 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:post_id],
                          user_id: @current_user.id)
     @post.destroy
-    flash[:notice] = "投稿を削除しました"
-    redirect_to "/posts/index"
-
-  # postが削除されるとき、post_tagテーブルも削除する。
-  # tagテーブルはそのまま残す
-  #
+    flash[:notice] = '投稿を削除しました'
+    redirect_to '/posts/index'
   end
 
   def ensure_correct_user
     @post = Post.find_by(id: params[:post_id])
     if @post.user_id != @current_user.id
-      flash[:notice] = "権限がありません"
-      redirect_to "/posts/index"
+      flash[:notice] = '権限がありません'
+      redirect_to '/posts/index'
     end
   end
 
