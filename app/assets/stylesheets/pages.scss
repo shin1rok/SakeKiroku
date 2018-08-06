@@ -103,7 +103,7 @@ header {
 }
 
 .header-menus .fa {
-padding-right: 5px;
+  padding-right: 5px;
 }
 
 .header-menus input[type="submit"] {
@@ -180,8 +180,6 @@ padding-right: 5px;
   text-align: left;
 }
 
-
-
 /* フラッシュ ================================ */
 .flash {
   padding: 10px 0;
@@ -194,6 +192,14 @@ padding-right: 5px;
   width: 100%;
   border-radius: 0 0 2px 2px;
   font-size: 14px;
+}
+
+.flash a {
+  color: blue;
+}
+
+.flash a:hover{
+  color: red;
 }
 
 /* home ================================ */

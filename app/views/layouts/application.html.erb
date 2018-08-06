@@ -46,6 +46,13 @@
     </div>
   <% end %>
 
+  <!--タグのフラッシュ-->
+  <% if flash[:tag_flash] %>
+    <div class="flash">
+      <%= flash[:tag_flash] %> / <%= link_to('クリア', '/posts/index') %>
+    </div>
+  <% end %>
+
   <body>
     <%= yield %>
   </body>
