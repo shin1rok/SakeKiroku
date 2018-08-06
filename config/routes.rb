@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/' => 'pages#home'
 
   # posts_controller
+  get 'posts/index/:tag_name' => "posts#index"
   get 'posts/index' => "posts#index"
   get 'posts/new' => "posts#new"
   get 'posts/:post_id' => "posts#edit"
