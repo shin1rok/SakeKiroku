@@ -18,6 +18,11 @@
   text-align: left;
 }
 
+.post-tag a {
+  font-size: 15px;
+  color: blue;
+}
+
 .post-time {
   text-align: left;
   color: lightslategray;
@@ -41,10 +46,6 @@
 }
 
 /* posts/new & posts/edit ================================ */
-.posts-new-edit {
-  //text-align: center;
-}
-
 .posts-new-edit textarea {
   font-size: 20px;
   padding: 10px;
