@@ -6,7 +6,7 @@ class PostsController < ApplicationController
     # タグで絞り込む場合
     if params[:tag_name] && (tag = Tag.find_by(name: params[:tag_name]))
       @posts = []
-      flash[:tag_flash] = "#{params[:tag_name]}で絞り込み"
+      flash.now[:tag_flash] = "#{params[:tag_name]}で絞り込み"
       Post.where(user_id: @current_user.id).order(created_at: :desc).each do |post|
         # post_idとtag_idで絞り込んだ時にpost_tagテーブルにレコードが存在する場合、add
         PostTag.where(post_id: post.id, tag_id: tag.id).each do |post_tag|
