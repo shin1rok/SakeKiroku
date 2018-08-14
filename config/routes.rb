@@ -16,5 +16,7 @@ Rails.application.routes.draw do
   # sessions_controller
   get 'auth/:provider/callback' => 'sessions#login'
   get 'sessions/logout' => 'sessions#logout'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  # users_controller
+  post 'users/:user_id' => 'users#destroy'
 end
