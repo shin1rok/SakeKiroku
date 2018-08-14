@@ -28,6 +28,11 @@
           <%= link_to('新規投稿', '/posts/new') %>
         </li>
         <li>
+          <%= link_to('退会', "#",
+                      method: :post,
+                      data: {confirm: '退会すると投稿が全て削除されます。よろしいですか？'}) %>
+        </li>
+        <li>
           <%= link_to('ログアウト', '/sessions/logout') %>
         </li>
       <% else %>
