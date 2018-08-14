@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'users/destroy'
   # pages_controller
   get '/' => 'pages#home'
 
