@@ -18,5 +18,5 @@ Rails.application.routes.draw do
   get 'sessions/logout' => 'sessions#logout'
 
   # users_controller
-  post 'users/:user_id' => 'users#destroy'
+  post 'users/destroy' => 'users#destroy'
 end
